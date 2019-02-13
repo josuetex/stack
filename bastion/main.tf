@@ -22,7 +22,7 @@
  */
 
 variable "instance_type" {
-  default     = "t3.micro"
+  default     = "t2.micro"
   description = "Instance type, see a list at: https://aws.amazon.com/ec2/instance-types/"
 }
 
