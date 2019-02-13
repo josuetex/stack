@@ -42,12 +42,12 @@ variable "region" {
 
 variable "cidr" {
   description = "the CIDR block to provision for the VPC, if set to something other than the default, both internal_subnets and external_subnets have to be defined as well"
-  default     = "10.30.0.0/16"
+  default     = "10.10.0.0/16"
 }
 
 variable "internal_subnets" {
   description = "a list of CIDRs for internal subnets in your VPC, must be set if the cidr variable is defined, needs to have as many elements as there are availability zones"
-  default     = ["10.30.0.0/19", "10.30.64.0/19", "10.30.128.0/19"]
+  default     = ["10.10.0.0/19", "10.10.64.0/19", "10.10.128.0/19"]
 }
 
 variable "external_subnets" {
