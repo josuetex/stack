@@ -37,12 +37,12 @@ variable "domain_name_servers" {
 
 variable "region" {
   description = "the AWS region in which resources are created, you must set the availability_zones variable as well if you define this value to something other than the default"
-  default     = "us-west-2"
+  default     = "sa-east-1"
 }
 
 variable "cidr" {
   description = "the CIDR block to provision for the VPC, if set to something other than the default, both internal_subnets and external_subnets have to be defined as well"
-  default     = "10.30.0.0/16"
+  default     = "10.10.0.0/16"
 }
 
 variable "internal_subnets" {
@@ -52,17 +52,17 @@ variable "internal_subnets" {
 
 variable "external_subnets" {
   description = "a list of CIDRs for external subnets in your VPC, must be set if the cidr variable is defined, needs to have as many elements as there are availability zones"
-  default     = ["10.30.32.0/20", "10.30.96.0/20", "10.30.160.0/20"]
+  default     = ["10.10.32.0/20", "10.10.96.0/20", "10.10.160.0/20"]
 }
 
 variable "availability_zones" {
   description = "a comma-separated list of availability zones, defaults to all AZ of the region, if set to something other than the defaults, both internal_subnets and external_subnets have to be defined as well"
-  default     = ["us-west-2a", "us-west-2b", "us-west-2c"]
+  default     = ["sa-east-1a", "sa-east-1b", "sa-east-1c"]
 }
 
 variable "bastion_instance_type" {
   description = "Instance type for the bastion"
-  default = "t2.micro"
+  default = "t3.micro"
 }
 
 variable "ecs_cluster_name" {
@@ -72,7 +72,7 @@ variable "ecs_cluster_name" {
 
 variable "ecs_instance_type" {
   description = "the instance type to use for your default ecs cluster"
-  default     = "m4.large"
+  default     = "t3.medium"
 }
 
 variable "ecs_instance_ebs_optimized" {
@@ -91,7 +91,7 @@ variable "ecs_min_size" {
 
 variable "ecs_max_size" {
   description = "the maximum number of instances to use in the default ecs cluster"
-  default     = 100
+  default     = 10
 }
 
 variable "ecs_desired_capacity" {
@@ -101,12 +101,12 @@ variable "ecs_desired_capacity" {
 
 variable "ecs_root_volume_size" {
   description = "the size of the ecs instance root volume"
-  default     = 25
+  default     = 50
 }
 
 variable "ecs_docker_volume_size" {
   description = "the size of the ecs instance docker volume"
-  default     = 25
+  default     = 50
 }
 
 variable "ecs_docker_auth_type" {
