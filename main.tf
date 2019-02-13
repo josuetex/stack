@@ -27,7 +27,7 @@ variable "key_name" {
 
 variable "domain_name" {
   description = "the internal DNS name to use with services"
-  default     = "stack.local"
+  default     = "mikweb.local"
 }
 
 variable "domain_name_servers" {
@@ -42,7 +42,7 @@ variable "region" {
 
 variable "cidr" {
   description = "the CIDR block to provision for the VPC, if set to something other than the default, both internal_subnets and external_subnets have to be defined as well"
-  default     = "10.10.0.0/16"
+  default     = "10.30.0.0/16"
 }
 
 variable "internal_subnets" {
@@ -57,7 +57,7 @@ variable "external_subnets" {
 
 variable "availability_zones" {
   description = "a comma-separated list of availability zones, defaults to all AZ of the region, if set to something other than the defaults, both internal_subnets and external_subnets have to be defined as well"
-  default     = ["sa-east-1a", "sa-east-1b", "sa-east-1c"]
+  default     = ["sa-east-1b", "sa-east-1c"]
 }
 
 variable "bastion_instance_type" {
