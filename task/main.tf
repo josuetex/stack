@@ -120,8 +120,7 @@ resource "aws_ecs_task_definition" "main" {
         "options": {
           "awslogs-group": "ecs/${var.name}",
           "awslogs-region": "${var.aws_log_region}",
-          "awslogs-stream-prefix": "${var.name}",
-          "tag": "${var.name}"
+          "awslogs-stream-prefix": "${var.name}"
         }
       }
     }
