@@ -22,12 +22,7 @@ resource "aws_iam_role" "default_ecs_role" {
         ]
       },
       "Effect": "Allow"
-    },
-    {
-      "Effect": "Allow",
-      "Action": "secretsmanager:ListSecrets",            
-      "Resource": "*"
-    }
+    }    
   ]
 }
 EOF
@@ -50,6 +45,24 @@ resource "aws_iam_role_policy" "default_ecs_service_role_policy" {
         "elasticloadbalancing:Describe*",
         "elasticloadbalancing:RegisterInstancesWithLoadBalancer"
       ],
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy" "default_ecs_secrets_role_policy" {
+  name = "ecs-secrets-role-policy-${var.name}-${var.environment}"
+  role = "${aws_iam_role.default_ecs_role.id}"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "secretsmanager:ListSecrets",            
       "Resource": "*"
     }
   ]
