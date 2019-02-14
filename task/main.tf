@@ -103,30 +103,30 @@ resource "aws_ecs_task_definition" "main" {
   }
 
   container_definitions = <<EOF
-[
-  {
-    "cpu": ${var.cpu},
-    "environment": ${var.env_vars},
-    "essential": true,
-    "command": ${var.command},
-    "image": "${var.image}:${var.image_version}",
-    "memory": ${var.memory},
-    "name": "${var.name}",
-    "portMappings": ${var.ports},
-    "entryPoint": ${var.entry_point},
-    "mountPoints": [],
-    "logConfiguration": {
-      "logDriver": "${var.log_driver}",
-      "options": {
-        "awslogs-group": "ecs/${var.name}",
-        "awslogs-region": "${var.aws_log_region}",
-        "awslogs-stream-prefix": "${var.name}"
-        "tag": "${var.name}"
+  [
+    {
+      "cpu": ${var.cpu},
+      "environment": ${var.env_vars},
+      "essential": true,
+      "command": ${var.command},
+      "image": "${var.image}:${var.image_version}",
+      "memory": ${var.memory},
+      "name": "${var.name}",
+      "portMappings": ${var.ports},
+      "entryPoint": ${var.entry_point},
+      "mountPoints": [],
+      "logConfiguration": {
+        "logDriver": "${var.log_driver}",
+        "options": {
+          "awslogs-group": "ecs/${var.name}",
+          "awslogs-region": "${var.aws_log_region}",
+          "awslogs-stream-prefix": "${var.name}",
+          "tag": "${var.name}"
+        }
       }
     }
-  }
-]
-EOF
+  ]
+  EOF
 }
 
 /**
