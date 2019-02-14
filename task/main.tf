@@ -64,8 +64,23 @@ variable "memory" {
 
 variable "log_driver" {
   description = "The log driver to use use for the container"
-  default     = "journald"
+  default     = "awslogs"
 }
+
+# variable "aws_log_group" {
+#   description = "The aws log group to use use for the container"
+#   default     = ""
+# }
+
+# variable "aws_log_region" {
+#   description = "The aws log region to use use for the container"
+#   default     = ""
+# }
+
+# variable "aws_log_stream_prefix" {
+#   description = "The aws log stream prefix to use use for the container"
+#   default     = ""
+# }
 
 variable "role" {
   description = "The IAM Role to assign to the Container"
@@ -103,6 +118,9 @@ resource "aws_ecs_task_definition" "main" {
     "logConfiguration": {
       "logDriver": "${var.log_driver}",
       "options": {
+        "awslogs-group": "ecs/${var.name}",
+        "awslogs-region": "${module.stack.region}",
+        "awslogs-stream-prefix": "${module.stack.name}"
         "tag": "${var.name}"
       }
     }
