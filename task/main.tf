@@ -88,7 +88,7 @@ variable "role" {
 }
 
 variable "aws_log_group" {
-  default = "ecs/${var.name}"
+  default = "ecs"
 }
 
 /**
@@ -98,7 +98,7 @@ variable "aws_log_group" {
 # The ECS task definition.
 
 resource "aws_cloudwatch_log_group" "main" {
-  name = "${var.aws_log_group}"
+  name = "${var.aws_log_group}/${var.name}"
 }
 
 resource "aws_ecs_task_definition" "main" {
@@ -126,7 +126,7 @@ resource "aws_ecs_task_definition" "main" {
       "logConfiguration": {
         "logDriver": "${var.log_driver}",
         "options": {
-          "awslogs-group": "${var.aws_log_group}",
+          "awslogs-group": "${var.aws_log_group}/${var.name}",
           "awslogs-region": "${var.aws_log_region}",
           "awslogs-stream-prefix": "${var.name}"
         }
