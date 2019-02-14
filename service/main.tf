@@ -121,6 +121,11 @@ variable "deployment_maximum_percent" {
   default     = 200
 }
 
+variable "aws_log_region" {
+  description = "The aws log region to use use for the container"
+  default     = ""
+}
+
 /**
  * Resources.
  */
@@ -148,13 +153,14 @@ resource "aws_ecs_service" "main" {
 module "task" {
   source = "../task"
 
-  name          = "${coalesce(var.name, replace(var.image, "/", "-"))}"
-  image         = "${var.image}"
-  image_version = "${var.version}"
-  command       = "${var.command}"
-  env_vars      = "${var.env_vars}"
-  memory        = "${var.memory}"
-  cpu           = "${var.cpu}"
+  name           = "${coalesce(var.name, replace(var.image, "/", "-"))}"
+  image          = "${var.image}"
+  image_version  = "${var.version}"
+  command        = "${var.command}"
+  env_vars       = "${var.env_vars}"
+  memory         = "${var.memory}"
+  cpu            = "${var.cpu}"
+  aws_log_region = "${var.aws_log_region}"
 
   ports = <<EOF
   [

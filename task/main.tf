@@ -72,10 +72,10 @@ variable "log_driver" {
 #   default     = ""
 # }
 
-# variable "aws_log_region" {
-#   description = "The aws log region to use use for the container"
-#   default     = ""
-# }
+variable "aws_log_region" {
+  description = "The aws log region to use use for the container"
+  default     = "sa-east-1"
+}
 
 # variable "aws_log_stream_prefix" {
 #   description = "The aws log stream prefix to use use for the container"
@@ -119,8 +119,8 @@ resource "aws_ecs_task_definition" "main" {
       "logDriver": "${var.log_driver}",
       "options": {
         "awslogs-group": "ecs/${var.name}",
-        "awslogs-region": "${module.stack.region}",
-        "awslogs-stream-prefix": "${module.stack.name}"
+        "awslogs-region": "${var.aws_log_region}",
+        "awslogs-stream-prefix": "${var.name}"
         "tag": "${var.name}"
       }
     }
